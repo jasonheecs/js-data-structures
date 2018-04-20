@@ -1,23 +1,23 @@
 'use strict';
 
 class Node {
-  constructor(value, next = null) {
+  constructor (value, next = null) {
     this.value = value;
     this.next = next;
   }
 }
 
-export default class List{
-  constructor() {
+export default class List {
+  constructor () {
     this.first = null;
   }
 
-  get values() {
+  get values () {
     let values = '';
 
     if (!this.isEmpty()) {
       let current = this.first;
-      
+
       while (current != null) {
         values += JSON.stringify(current.value) + ',';
         current = current.next;
@@ -30,30 +30,10 @@ export default class List{
   }
 
   /**
-   * Prints all values in the linked list
-   * @return {string}
-   */
-  print() {
-    if (this.isEmpty()) {
-      console.log("List is empty");
-    } else {
-      let current = this.first;
-      let display = '';
-
-      while (current != null) {
-        display += JSON.stringify(current.value) + ',';
-        current = current.next;
-      }
-
-      console.log(display.slice(0, -1));
-    }
-  }
-
-  /**
   * Adds a value to the end of the linked list
   * @param {*}
   */
-  add(value) {
+  add (value) {
     let n = new Node(value);
 
     if (this.isEmpty()) {
@@ -73,7 +53,7 @@ export default class List{
    * Adds a value at first position of list
    * @param {*} value
    */
-  addFirst(value) {
+  addFirst (value) {
     let n = new Node(value, this.first);
     this.first = n;
   }
@@ -83,7 +63,7 @@ export default class List{
   * @param {*} value
   * @param {Number} position
   */
-  addAtPosition(value, position) {
+  addAtPosition (value, position) {
     let n = new Node(value);
     let index = 1;
     let current = this.first;
@@ -104,16 +84,82 @@ export default class List{
         break;
       }
     }
-    
-    if ((index != position && position !== 0) || current === null ) {
-      console.log('Unable to add at position ' + position + ', list is of length ' + index);
+
+    if ((index !== position && position !== 0) || current === null) {
+      throw new Error('Unable to add at position ' + position + ', list is of length ' + (index === 1 ? 0 : index));
+    }
+  }
+
+  /**
+   * Search for a value in the list
+   * @param  {*} value
+   * @return {Node}
+   */
+  search (value) {
+    let current = this.first;
+
+    while (current !== null && current.next !== null) {
+      if (current.value === value) {
+        return current;
+      }
+
+      current = current.next;
+    }
+
+    return false;
+  }
+
+  /**
+   * Delete a value from the list
+   * @param  {*} value
+   * @return {Boolean}
+   */
+  delete (value) {
+    let current = this.first;
+
+    if (current != null && current.value === value) {
+      this.first = current.next;
+      current = current.next;
+
+      return true;
+    }
+
+    while (current !== null) {
+      if (current.next.value === value) {
+        current.next = current.next.next;
+        return true;
+      }
+
+      current = current.next;
+    }
+
+    return false;
+  }
+
+  /**
+   * Reverse the linked list
+   */
+  reverse () {
+    let next = this.first.next;
+    let tmp;
+
+    while (tmp !== null) {
+      tmp = next.next;
+
+      next.next = this.first;
+      if (next.next.next === next) {
+        next.next.next = null;
+      }
+
+      this.first = next;
+      next = tmp;
     }
   }
 
   /**
   * @return {Boolean}
   */
-  isEmpty() {
+  isEmpty () {
     return this.first === null;
   }
 };
