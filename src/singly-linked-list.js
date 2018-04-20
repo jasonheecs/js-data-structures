@@ -91,6 +91,52 @@ export default class List {
   }
 
   /**
+   * Search for a value in the list
+   * @param  {*} value
+   * @return {Node}
+   */
+  search (value) {
+    let current = this.first;
+
+    while (current !== null && current.next !== null) {
+      if (current.value === value) {
+        return current;
+      }
+
+      current = current.next;
+    }
+
+    return false;
+  }
+
+  /**
+   * Delete a value from the list
+   * @param  {*} value
+   * @return {Boolean}
+   */
+  delete (value) {
+    let current = this.first;
+
+    if (current != null && current.value === value) {
+      this.first = current.next;
+      current = current.next;
+
+      return true;
+    }
+
+    while (current !== null) {
+      if (current.next.value === value) {
+        current.next = current.next.next;
+        return true;
+      }
+
+      current = current.next;
+    }
+
+    return false;
+  }
+
+  /**
   * @return {Boolean}
   */
   isEmpty () {
