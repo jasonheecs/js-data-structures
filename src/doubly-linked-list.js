@@ -1,15 +1,17 @@
 'use strict';
 
 class Node {
-  constructor (value, next = null) {
+  constructor (value, next = null, previous = null) {
     this.value = value;
     this.next = next;
+    this.previous = previous;
   }
 }
 
 export default class List {
   constructor () {
     this.first = null;
+    this.end = null;
   }
 
   get values () {
@@ -18,7 +20,7 @@ export default class List {
     if (!this.isEmpty()) {
       let current = this.first;
 
-      while (current != null) {
+      while (current !== null) {
         values += JSON.stringify(current.value) + ',';
         current = current.next;
       }
@@ -38,14 +40,11 @@ export default class List {
 
     if (this.isEmpty()) {
       this.first = n;
+      this.end = this.first;
     } else {
-      let current = this.first;
-
-      while (current.next != null) {
-        current = current.next;
-      }
-
-      current.next = n;
+      this.end.next = n;
+      n.previous = this.end;
+      this.end = n;
     }
   }
 
@@ -55,7 +54,15 @@ export default class List {
    */
   addFirst (value) {
     let n = new Node(value, this.first);
+    if (!this.isEmpty()) {
+      this.first.previous = n;
+    }
+
     this.first = n;
+
+    if (this.end === null) {
+      this.end = this.first;
+    }
   }
 
   /**
@@ -64,23 +71,31 @@ export default class List {
   * @param {Number} position
   */
   addAtPosition (value, position) {
-    let n = new Node(value);
     let index = 1;
     let current = this.first;
+    let n = new Node(value);
 
     if (position === 0) {
       this.addFirst(value);
       return;
     }
 
-    while (current != null) {
+    while (current !== null) {
       if (index < position) {
         current = current.next;
         index++;
       } else if (index === position) {
         let tmp = current.next;
+
         current.next = n;
+        n.previous = current;
         n.next = tmp;
+        tmp.previous = n;
+
+        if (n.previous === this.end) {
+          this.end = n;
+        }
+
         break;
       }
     }
@@ -98,7 +113,7 @@ export default class List {
   search (value) {
     let current = this.first;
 
-    while (current !== null && current.next !== null) {
+    while (current !== null) {
       if (current.value === value) {
         return current;
       }
@@ -115,44 +130,30 @@ export default class List {
    * @return {Boolean}
    */
   delete (value) {
-    let current = this.first;
+    let node = this.search(value);
 
-    if (current != null && current.value === value) {
-      this.first = current.next;
+    if (node) {
+      if (!node.previous) {
+        this.first = node.next;
+        this.first.previous = null;
+      } else {
+        let tmp = node.next;
+        let tmp2 = node.previous;
+
+        node.previous.next = tmp;
+        if (tmp) {
+          tmp.previous = tmp2;
+        }
+
+        if (this.end === node.previous) {
+          this.end = node;
+        }
+      }
 
       return true;
     }
 
-    while (current !== null) {
-      if (current.next.value === value) {
-        current.next = current.next.next;
-        return true;
-      }
-
-      current = current.next;
-    }
-
     return false;
-  }
-
-  /**
-   * Reverse the linked list
-   */
-  reverse () {
-    let next = this.first.next;
-    let tmp;
-
-    while (tmp !== null) {
-      tmp = next.next;
-
-      next.next = this.first;
-      if (next.next.next === next) {
-        next.next.next = null;
-      }
-
-      this.first = next;
-      next = tmp;
-    }
   }
 
   /**
