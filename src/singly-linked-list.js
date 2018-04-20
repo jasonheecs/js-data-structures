@@ -137,6 +137,26 @@ export default class List {
   }
 
   /**
+   * Reverse the linked list
+   */
+  reverse () {
+    let next = this.first.next;
+    let tmp;
+
+    while (tmp !== null) {
+      tmp = next.next;
+
+      next.next = this.first;
+      if (next.next.next === next) {
+        next.next.next = null;
+      }
+
+      this.first = next;
+      next = tmp;
+    }
+  }
+
+  /**
   * @return {Boolean}
   */
   isEmpty () {

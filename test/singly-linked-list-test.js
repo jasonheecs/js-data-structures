@@ -13,7 +13,7 @@ const expect = require('chai').expect;
  * @return {Array}
  */
 function generateRandomNumbers (maxLength, minValue, maxValue) {
-  let dataLength = getRandomIntInclusive(1, maxLength);
+  let dataLength = getRandomIntInclusive(2, maxLength);
   let randomData = [];
 
   for (let i = 0; i < dataLength; i++) {
@@ -140,5 +140,13 @@ describe('test singly linked list', function () {
     let list = new List();
 
     expect(list.delete(5)).to.be.false;
+  });
+
+  it('reverse list', function () {
+    let data = generateRandomNumbers(50, 1, 10000);
+    let list = generateList(data);
+    list.reverse();
+
+    expect(list.values).to.equal(formatRandomData(data.reverse()));
   });
 });
