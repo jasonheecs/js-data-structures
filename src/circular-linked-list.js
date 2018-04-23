@@ -8,22 +8,21 @@ class Node {
   }
 }
 
-export default class List {
+export default class {
   constructor () {
-    this.first = null;
-    this.end = null;
+    this.last = null;
   }
 
   get values () {
     let values = '';
 
     if (!this.isEmpty()) {
-      let current = this.first;
+      let current = this.last.next;
 
-      while (current !== null) {
+      do {
         values += JSON.stringify(current.value) + ',';
         current = current.next;
-      }
+      } while (current && current !== this.last.next);
 
       values = values.slice(0, -1);
     }
@@ -39,12 +38,23 @@ export default class List {
     let n = new Node(value);
 
     if (this.isEmpty()) {
-      this.first = n;
-      this.end = this.first;
+      this.last = n;
+      n.next = n;
+      n.previous = n;
     } else {
-      this.end.next = n;
-      n.previous = this.end;
-      this.end = n;
+      let first = this.last.next;
+
+      this.last.next = n;
+      n.previous = this.last;
+      first.previous = n;
+
+      if (first === this.last) {
+        n.next = this.last;
+      } else {
+        n.next = first;
+      }
+
+      this.last = n;
     }
   }
 
@@ -53,15 +63,16 @@ export default class List {
    * @param {*} value
    */
   addFirst (value) {
-    let n = new Node(value, this.first);
-    if (!this.isEmpty()) {
-      this.first.previous = n;
-    }
+    let n = new Node(value);
 
-    this.first = n;
-
-    if (this.end === null) {
-      this.end = this.first;
+    if (this.isEmpty()) {
+      this.add(value);
+    } else {
+      let first = this.last.next;
+      n.next = first;
+      n.previous = this.last;
+      first.previous = n;
+      this.last.next = n;
     }
   }
 
@@ -72,7 +83,7 @@ export default class List {
   */
   addAtPosition (value, position) {
     let index = 1;
-    let current = this.first;
+    let current;
     let n = new Node(value);
 
     if (position === 0) {
@@ -80,7 +91,13 @@ export default class List {
       return;
     }
 
-    while (current !== null) {
+    if (this.isEmpty() && position > 0) {
+      throw new Error('Unable to add at position ' + position + ', list is of length ' + (index === 1 ? 0 : index));
+    } else {
+      current = this.last.next;
+    }
+
+    while (index <= position) {
       if (index < position) {
         current = current.next;
         index++;
@@ -88,19 +105,23 @@ export default class List {
         let tmp = current.next;
 
         current.next = n;
-        n.previous = current;
-        n.next = tmp;
         tmp.previous = n;
+        n.next = tmp;
+        n.previous = current;
 
-        if (n.previous === this.end) {
-          this.end = n;
-        }
+        break;
+      }
 
+      if (current === this.last.next) {
         break;
       }
     }
 
-    if ((index !== position && position !== 0) || current === null) {
+    if (n.previous === this.last) {
+      this.last = n;
+    }
+
+    if (index !== position && position !== 0) {
       throw new Error('Unable to add at position ' + position + ', list is of length ' + (index === 1 ? 0 : index));
     }
   }
@@ -111,15 +132,17 @@ export default class List {
    * @return {Node}
    */
   search (value) {
-    let current = this.first;
+    let current = this.last;
 
-    while (current !== null) {
-      if (current.value === value) {
-        return current;
+    do {
+      if (current) {
+        if (current.value === value) {
+          return current;
+        }
+
+        current = current.next;
       }
-
-      current = current.next;
-    }
+    } while (current !== null && current !== this.last);
 
     return false;
   }
@@ -133,21 +156,11 @@ export default class List {
     let node = this.search(value);
 
     if (node) {
-      if (!node.previous) {
-        this.first = node.next;
-        this.first.previous = null;
-      } else {
-        let tmp = node.next;
-        let tmp2 = node.previous;
+      node.previous.next = node.next;
+      node.next.previous = node.previous;
 
-        node.previous.next = tmp;
-        if (tmp) {
-          tmp.previous = tmp2;
-        }
-
-        if (this.end === node.previous) {
-          this.end = node;
-        }
+      if (node === this.last) {
+        this.last = node.previous;
       }
 
       return true;
@@ -161,25 +174,22 @@ export default class List {
    */
   reverse () {
     if (!this.isEmpty()) {
-      let current = this.first;
+      let first = this.last.next;
+      let current = first;
+      let tmp;
 
-      while (current !== null) {
-        let tmp = current.next;
+      do {
+        tmp = current.next;
         current.next = current.previous;
         current.previous = tmp;
         current = tmp;
-      }
+      } while (current !== first);
 
-      let tmp = this.end;
-      this.end = this.first;
-      this.first = tmp;
+      this.last = current;
     }
   }
 
-  /**
-  * @return {Boolean}
-  */
   isEmpty () {
-    return this.first === null;
+    return this.last === null;
   }
-};
+}
