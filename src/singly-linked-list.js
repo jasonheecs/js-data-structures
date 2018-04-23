@@ -34,7 +34,7 @@ export default class List {
   * @param {*}
   */
   add (value) {
-    let n = new Node(value);
+    let n = typeof value === 'Node' ? value : new Node(value);
 
     if (this.isEmpty()) {
       this.first = n;
@@ -98,7 +98,7 @@ export default class List {
   search (value) {
     let current = this.first;
 
-    while (current !== null && current.next !== null) {
+    while (current !== null) {
       if (current.value === value) {
         return current;
       }

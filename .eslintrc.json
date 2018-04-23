@@ -3,7 +3,8 @@
   "rules": {
     "no-extra-semi": ["off", "always"],
     "semi": ["error", "always"],
-    "require-jsdoc": ["warn"]
+    "require-jsdoc": ["warn"],
+    "valid-typeof": ["off"]
   },
   "env": {
     "mocha": true 
