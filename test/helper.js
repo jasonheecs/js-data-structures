@@ -7,7 +7,7 @@
  * @return {Array}
  */
 export function generateRandomNumbers (maxLength, minValue, maxValue) {
-  let dataLength = getRandomIntInclusive(10, maxLength);
+  let dataLength = getRandomIntInclusive(3, maxLength);
   let randomData = [];
 
   for (let i = 0; i < dataLength; i++) {
