@@ -12,7 +12,7 @@ class Node {
   }
 
   /**
-   * @return {Boolean}
+   * @return {boolean}
    */
   isLeaf () {
     return !this.left && !this.right;
@@ -20,7 +20,6 @@ class Node {
 }
 
 /**
- * search()
  * findMin()
  * findMax()
  * preOrder()
@@ -60,5 +59,33 @@ export default class BST {
 
       searchTree(node, this.root);
     }
+  }
+
+  /**
+   * @param  {*} value
+   * @return {(Node | boolean)}
+   */
+  search (value) {
+    if (this.root === null) {
+      return false;
+    }
+
+    let current = this.root;
+
+    while (current !== null) {
+      if (value === current.value) {
+        return current;
+      }
+
+      if (value < current.value) {
+        current = current.left;
+      }
+
+      if (value > current.value) {
+        current = current.right;
+      }
+    }
+
+    return false;
   }
 };
