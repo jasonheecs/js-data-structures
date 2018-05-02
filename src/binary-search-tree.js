@@ -20,18 +20,45 @@ class Node {
 }
 
 /**
- * insert()
  * search()
- * getMin()
- * getMax()
+ * findMin()
+ * findMax()
  * preOrder()
  * inOrder()
  * postOrder()
  * levelOrder()
  */
-export default class {
+export default class BST {
   constructor () {
     this.root = null;
-    console.log(new Node(1));
+  }
+
+  /**
+   * @param {*} value
+   */
+  add (value) {
+    let node = new Node(value);
+
+    if (this.root === null) {
+      this.root = node;
+    } else {
+      const searchTree = (node, root) => {
+        if (node.value <= root.value) {
+          if (root.left === null) {
+            root.left = node;
+          } else {
+            searchTree(node, root.left);
+          }
+        } else if (node.value > root.value) {
+          if (root.right === null) {
+            root.right = node;
+          } else {
+            searchTree(node, root.right);
+          }
+        }
+      };
+
+      searchTree(node, this.root);
+    }
   }
 };

@@ -4,7 +4,8 @@
     "no-extra-semi": ["off", "always"],
     "semi": ["error", "always"],
     "require-jsdoc": ["warn"],
-    "valid-typeof": ["off"]
+    "valid-typeof": ["off"],
+    "no-unused-expressions": ["off"]
   },
   "env": {
     "mocha": true 

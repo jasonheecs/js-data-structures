@@ -1,5 +1,3 @@
-/* eslint no-unused-expressions: 0 */
-
 'use strict';
 
 import {Queue} from '../src/index.js';

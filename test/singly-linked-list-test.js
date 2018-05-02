@@ -1,5 +1,3 @@
-/* eslint no-unused-expressions: 0 */
-
 'use strict';
 
 import {List} from '../src/index.js';
