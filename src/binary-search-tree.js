@@ -20,7 +20,6 @@ class Node {
 }
 
 /**
- * findMin()
  * findMax()
  * preOrder()
  * inOrder()
@@ -87,5 +86,39 @@ export default class BST {
     }
 
     return false;
+  }
+
+  /**
+   * @return {(boolean | *)}
+   */
+  findMin () {
+    if (this.root === null) {
+      return false;
+    }
+
+    let current = this.root;
+
+    while (current.left !== null) {
+      current = current.left;
+    }
+
+    return current.value;
+  }
+
+  /**
+   * @return {(boolean | *)}
+   */
+  findMax () {
+    if (this.root === null) {
+      return false;
+    }
+
+    let current = this.root;
+
+    while (current.right !== null) {
+      current = current.right;
+    }
+
+    return current.value;
   }
 };

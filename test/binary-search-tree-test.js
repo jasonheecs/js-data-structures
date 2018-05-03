@@ -30,41 +30,43 @@ function checkIfTreeIsBST (tree) {
   return checkSubtree(tree.root || tree);
 }
 
+/**
+ * Generate a tree with a list of values
+ * @param  {Array} data
+ * @return {BST}
+ */
+function generateTree (data) {
+  let tree = new BST();
+
+  data.forEach((value) => {
+    tree.add(value);
+  });
+
+  return tree;
+}
+
 describe('Test BST', function () {
   it('test adding values', function () {
-    let tree = new BST();
-
     let randomData = generateRandomNumbers(50, 1, 9999);
-    randomData.forEach((value) => {
-      tree.add(value);
-    });
+    let tree = generateTree(randomData);
 
     expect(checkIfTreeIsBST(tree)).to.be.true;
   });
 
   it('test adding identical values', function () {
-    let tree = new BST();
-
     let randomData = [];
     for (let i = 0; i < 50; i++) {
       randomData.push(1);
     }
 
-    randomData.forEach((value) => {
-      tree.add(value);
-    });
+    let tree = generateTree(randomData);
 
     expect(checkIfTreeIsBST(tree)).to.be.true;
   });
 
   it('test searching tree', function () {
-    let tree = new BST();
-
     let randomData = generateRandomNumbers(50, 1, 9999);
-    randomData.forEach((value) => {
-      tree.add(value);
-    });
-
+    let tree = generateTree(randomData);
     let randomIndex = getRandomIntInclusive(0, randomData.length - 1);
     let searchResult = tree.search(randomData[randomIndex]);
 
@@ -73,12 +75,8 @@ describe('Test BST', function () {
   });
 
   it('test searching for non-existent value', function () {
-    let tree = new BST();
-
     let data = [1, 2, 3, 4, 5];
-    data.forEach((value) => {
-      tree.add(value);
-    });
+    let tree = generateTree(data);
 
     expect(tree.search(10)).to.be.false;
   });
@@ -86,5 +84,27 @@ describe('Test BST', function () {
   it('test searching empty tree', function () {
     let tree = new BST();
     expect(tree.search(10)).to.be.false;
+  });
+
+  it('test find min', function () {
+    let randomData = generateRandomNumbers(50, 1, 9999);
+    let tree = generateTree(randomData);
+
+    expect(tree.findMin()).to.equal(Math.min.apply(null, randomData));
+  });
+
+  it('test find min of empty tree', function () {
+    expect((new BST()).findMin()).to.be.false;
+  });
+
+  it('test find max', function () {
+    let randomData = generateRandomNumbers(50, 1, 9999);
+    let tree = generateTree(randomData);
+
+    expect(tree.findMax()).to.equal(Math.max.apply(null, randomData));
+  });
+
+  it('test find max of empty tree', function () {
+    expect((new BST()).findMax()).to.be.false;
   });
 });
