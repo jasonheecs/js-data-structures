@@ -31,6 +31,17 @@ function checkIfTreeIsBST (tree) {
 }
 
 /**
+ * Checks if an array is sorted
+ * @param  {Array}  arr
+ * @return {Boolean}
+ */
+function isSorted (arr) {
+  return arr.every((el, index) =>
+    el <= arr[index + 1] || index >= arr.length - 1
+  );
+}
+
+/**
  * Generate a tree with a list of values
  * @param  {Array} data
  * @return {BST}
@@ -129,5 +140,13 @@ describe('Test BST', function () {
     let tree = generateTree(data);
 
     expect(tree.preOrder()).to.deep.equal([4537, 2555, 1169, 1000, 2172, 4842]);
+  });
+
+  it('check inOrder traversal', function () {
+    let data = [4537, 2555, 4842, 1169, 2172, 1000];
+    let tree = generateTree(data);
+
+    expect(tree.inOrder()).to.deep.equal([1000, 1169, 2172, 2555, 4537, 4842]);
+    expect(isSorted(tree.inOrder())).to.be.true;
   });
 });

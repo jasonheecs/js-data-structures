@@ -184,6 +184,9 @@ export default class BST {
     this.root = deleteNode(value, this.root);
   }
 
+  /**
+   * @return {Array}
+   */
   preOrder () {
     const preOrderTraversal = (node, result) => {
       if (node === null) {
@@ -204,5 +207,30 @@ export default class BST {
     };
 
     return preOrderTraversal(this.root, []);
+  }
+
+  /**
+   * @return {Array}
+   */
+  inOrder () {
+    const inOrderTraversal = (node, result) => {
+      if (node === null) {
+        return;
+      }
+
+      if (node.left) {
+        result.concat(inOrderTraversal(node.left, result));
+      }
+
+      result.push(node.value);
+
+      if (node.right) {
+        result.concat(inOrderTraversal(node.right, result));
+      }
+
+      return result;
+    };
+
+    return inOrderTraversal(this.root, []);
   }
 };
