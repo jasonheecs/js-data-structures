@@ -107,4 +107,20 @@ describe('Test BST', function () {
   it('test find max of empty tree', function () {
     expect((new BST()).findMax()).to.be.false;
   });
+
+  it('test deletion of value', function () {
+    let randomData = generateRandomNumbers(50, 1, 9999);
+    let tree = generateTree(randomData);
+    let randomIndex = getRandomIntInclusive(0, randomData.length - 1);
+    let randomValue = randomData[randomIndex];
+
+    let oldSize = tree.size();
+
+    tree.delete(randomValue);
+    randomData.splice(randomIndex, 1);
+
+    expect(checkIfTreeIsBST(tree)).to.be.true;
+    expect(oldSize - tree.size()).to.equal(1);
+    expect(tree.size()).to.equal(randomData.length);
+  });
 });

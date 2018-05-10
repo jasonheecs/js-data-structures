@@ -1,7 +1,6 @@
 'use strict';
 
 /**
- * size()
  * height()
  */
 class Node {
@@ -9,6 +8,22 @@ class Node {
     this.value = value;
     this.left = null;
     this.right = null;
+  }
+
+  /**
+   * Get total number of elements in tree / subtrees
+   * @return {number}
+   */
+  size () {
+    const calculateSize = (node) => {
+      if (node === null) {
+        return 0;
+      }
+
+      return 1 + calculateSize(node.left) + calculateSize(node.right);
+    };
+
+    return calculateSize(this);
   }
 
   /**
@@ -20,7 +35,6 @@ class Node {
 }
 
 /**
- * findMax()
  * preOrder()
  * inOrder()
  * postOrder()
@@ -29,6 +43,13 @@ class Node {
 export default class BST {
   constructor () {
     this.root = null;
+  }
+
+  /**
+   * @return {number}
+   */
+  size () {
+    return this.root.size();
   }
 
   /**
@@ -120,5 +141,64 @@ export default class BST {
     }
 
     return current.value;
+  }
+
+  /**
+   * @param  {*} value
+   * @return {Node | null}
+   */
+  delete (value) {
+    const deleteNode = (value, node) => {
+      if (node === null) {
+        return null;
+      }
+
+      if (node.value === value) {
+        // node has no children
+        if (node.isLeaf()) {
+          return null;
+        }
+
+        // node has one child
+        if (node.left === null || node.right === null) {
+          return node.left === null ? node.right : node.left;
+        }
+
+        // node has two children
+        let tmp = node.right;
+        while (tmp.left !== null) {
+          tmp = tmp.left;
+        }
+
+        node.value = tmp.value;
+        node.right = deleteNode(tmp.value, node.right);
+      } else if (value < node.value) {
+        node.left = deleteNode(value, node.left);
+      } else {
+        node.right = deleteNode(value, node.right);
+      }
+
+      return node;
+    };
+
+    this.root = deleteNode(value, this.root);
+  }
+
+  print () {
+    let printValues = (node) => {
+      if (node !== null) {
+        console.log(node);
+      }
+
+      if (node.left !== null) {
+        printValues(node.left);
+      }
+
+      if (node.right !== null) {
+        printValues(node.right);
+      }
+    };
+
+    printValues(this.root);
   }
 };
