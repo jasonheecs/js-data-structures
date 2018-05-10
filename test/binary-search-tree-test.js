@@ -149,4 +149,11 @@ describe('Test BST', function () {
     expect(tree.inOrder()).to.deep.equal([1000, 1169, 2172, 2555, 4537, 4842]);
     expect(isSorted(tree.inOrder())).to.be.true;
   });
+
+  it('check postOrder traversal', function () {
+    let data = [4537, 2555, 4842, 1169, 2172, 1000];
+    let tree = generateTree(data);
+
+    expect(tree.postOrder()).to.deep.equal([1000, 2172, 1169, 2555, 4842, 4537]);
+  });
 });

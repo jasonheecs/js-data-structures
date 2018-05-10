@@ -35,9 +35,6 @@ class Node {
 }
 
 /**
- * preOrder()
- * inOrder()
- * postOrder()
  * levelOrder()
  */
 export default class BST {
@@ -232,5 +229,30 @@ export default class BST {
     };
 
     return inOrderTraversal(this.root, []);
+  }
+
+  /**
+   * @return {Array}
+   */
+  postOrder () {
+    const postOrderTraversal = (node, result) => {
+      if (node === null) {
+        return;
+      }
+
+      if (node.left) {
+        result.concat(postOrderTraversal(node.left, result));
+      }
+
+      if (node.right) {
+        result.concat(postOrderTraversal(node.right, result));
+      }
+
+      result.push(node.value);
+
+      return result;
+    };
+
+    return postOrderTraversal(this.root, []);
   }
 };
