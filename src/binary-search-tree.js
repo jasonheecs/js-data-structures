@@ -184,21 +184,25 @@ export default class BST {
     this.root = deleteNode(value, this.root);
   }
 
-  print () {
-    let printValues = (node) => {
-      if (node !== null) {
-        console.log(node);
+  preOrder () {
+    const preOrderTraversal = (node, result) => {
+      if (node === null) {
+        return;
       }
 
-      if (node.left !== null) {
-        printValues(node.left);
+      result.push(node.value);
+
+      if (node.left) {
+        result.concat(preOrderTraversal(node.left, result));
       }
 
-      if (node.right !== null) {
-        printValues(node.right);
+      if (node.right) {
+        result.concat(preOrderTraversal(node.right, result));
       }
+
+      return result;
     };
 
-    printValues(this.root);
+    return preOrderTraversal(this.root, []);
   }
 };

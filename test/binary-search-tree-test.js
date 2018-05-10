@@ -123,4 +123,11 @@ describe('Test BST', function () {
     expect(oldSize - tree.size()).to.equal(1);
     expect(tree.size()).to.equal(randomData.length);
   });
+
+  it('check preOrder traversal', function () {
+    let data = [4537, 2555, 4842, 1169, 2172, 1000];
+    let tree = generateTree(data);
+
+    expect(tree.preOrder()).to.deep.equal([4537, 2555, 1169, 1000, 2172, 4842]);
+  });
 });
