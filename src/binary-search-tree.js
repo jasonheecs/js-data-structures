@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * height()
- */
 class Node {
   constructor (value) {
     this.value = value;
@@ -27,6 +24,21 @@ class Node {
   }
 
   /**
+   * @return {number}
+   */
+  height () {
+    const calculateHeight = (node) => {
+      if (node === null) {
+        return 0;
+      }
+
+      return Math.max(1 + calculateHeight(node.left), 1 + calculateHeight(node.right));
+    };
+
+    return calculateHeight(this);
+  }
+
+  /**
    * @return {boolean}
    */
   isLeaf () {
@@ -47,6 +59,13 @@ export default class BST {
    */
   size () {
     return this.root.size();
+  }
+
+  /**
+   * @return {number}
+   */
+  height () {
+    return this.root.height();
   }
 
   /**

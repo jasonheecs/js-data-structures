@@ -75,6 +75,17 @@ describe('Test BST', function () {
     expect(checkIfTreeIsBST(tree)).to.be.true;
   });
 
+  it('test checking tree height', function () {
+    let tree = generateTree([4537, 2555, 4842, 1169, 2172, 1000]);
+    expect(tree.height()).to.equal(4);
+
+    tree = generateTree([5, 2, -4, 3, 18]);
+    expect(tree.height()).to.equal(3);
+
+    tree = generateTree([1, 2, 3, 4, 5]);
+    expect(tree.height()).to.equal(5);
+  });
+
   it('test searching tree', function () {
     let randomData = generateRandomNumbers(50, 1, 9999);
     let tree = generateTree(randomData);
