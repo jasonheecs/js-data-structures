@@ -274,4 +274,30 @@ export default class BST {
 
     return postOrderTraversal(this.root, []);
   }
+
+  /**
+   * @return {Array}
+   */
+  levelOrder () {
+    const getLevel = (root, level, result) => {
+      if (root === null) {
+        return;
+      }
+
+      if (level === 1) {
+        return result.push(root.value);
+      }
+
+      getLevel(root.left, level - 1, result);
+      getLevel(root.right, level - 1, result);
+    };
+
+    let result = [];
+
+    for (let i = 1; i <= this.root.height(); i++) {
+      getLevel(this.root, i, result);
+    }
+
+    return result;
+  }
 };

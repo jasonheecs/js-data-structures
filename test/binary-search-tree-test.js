@@ -167,4 +167,11 @@ describe('Test BST', function () {
 
     expect(tree.postOrder()).to.deep.equal([1000, 2172, 1169, 2555, 4842, 4537]);
   });
+
+  it('check levelOrder traversal', function () {
+    let data = [4537, 2555, 4842, 1169, 2172, 1000];
+    let tree = generateTree(data);
+
+    expect(tree.levelOrder()).to.deep.equal([4537, 2555, 4842, 1169, 1000, 2172]);
+  });
 });
