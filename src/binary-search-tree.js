@@ -300,4 +300,24 @@ export default class BST {
 
     return result;
   }
+
+  /**
+   * @param  {Node} node
+   */
+  invert (node) {
+    const invertSubtree = (node) => {
+      if (node === null) {
+        return;
+      }
+
+      let tmp = node.left;
+      node.left = node.right;
+      node.right = tmp;
+
+      invertSubtree(node.left);
+      invertSubtree(node.right);
+    };
+
+    invertSubtree(this.root);
+  }
 };

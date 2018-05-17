@@ -174,4 +174,16 @@ describe('Test BST', function () {
 
     expect(tree.levelOrder()).to.deep.equal([4537, 2555, 4842, 1169, 1000, 2172]);
   });
+
+  it('check invert', function () {
+    let data = [4, 2, 7, 1, 3, 6, 9];
+    let tree = generateTree(data);
+    tree.invert();
+
+    expect(tree.inOrder()).to.deep.equal([9, 7, 6, 4, 3, 2, 1]);
+
+    tree.invert();
+
+    expect(tree.inOrder()).to.deep.equal(generateTree(data).inOrder());
+  });
 });
