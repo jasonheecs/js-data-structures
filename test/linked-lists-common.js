@@ -1,5 +1,3 @@
-/* eslint no-unused-expressions: 0 */
-
 'use strict';
 
 import {generateRandomNumbers, generateList, getRandomIntInclusive, formatRandomData} from './helper.js';
