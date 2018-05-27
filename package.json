@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src/*.js test/*.js",
+    "fix-lint": "eslint src/*.js test/*.js --fix",
     "prepare": "./node_modules/babel-cli/bin/babel.js src --out-dir lib",
     "precommit": "npm run lint",
     "test": "nyc --reporter=html --reporter=text mocha --require babel-core/register",

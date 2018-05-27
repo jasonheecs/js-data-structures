@@ -72,6 +72,24 @@ export default class Trie {
   }
 
   /**
+   * @param  {string}  word
+   * @return {Boolean}
+   */
+  hasWord (word) {
+    let current = this.root;
+
+    Array.from(word).forEach((letter) => {
+      if (!current.getChild(letter)) {
+        return false;
+      }
+
+      current = current.getChild(letter);
+    });
+
+    return current.isCompleteWord;
+  }
+
+  /**
   * @param  {string}  word
   * @return {Boolean}
   */
