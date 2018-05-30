@@ -6,6 +6,7 @@ import CircularList from './circular-linked-list.js';
 import Stack from './stack.js';
 import Queue from './queue.js';
 import BST from './binary-search-tree.js';
+import Trie from './trie.js';
 
 export {
   List,
@@ -13,5 +14,6 @@ export {
   CircularList,
   Stack,
   Queue,
-  BST
+  BST,
+  Trie
 };
