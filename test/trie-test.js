@@ -59,4 +59,14 @@ describe('testing trie', function () {
 
     expect(trie.hasWord('cat')).to.be.false;
   });
+
+  it('test finding node based on prefix', function () {
+    let words = ['call', 'dog', 'carded'];
+    let trie = createTrie(words);
+
+    expect(trie.find('ca').children.size).to.be.above(1);
+    expect(trie.find('do').children.size).to.equal(1);
+    expect(trie.find('o')).to.equal(null);
+    expect(trie.find.bind(trie, '')).to.throw(Error, 'Invalid Word');
+  });
 });

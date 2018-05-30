@@ -90,6 +90,28 @@ export default class Trie {
   }
 
   /**
+   * @param  {string} prefix
+   * @return {Node}
+   */
+  find (prefix) {
+    if (!this.isValidWord(prefix)) {
+      throw Error('Invalid Word');
+    }
+
+    let current = this.root;
+
+    Array.from(prefix).forEach((letter) => {
+      if (!current.getChild(letter)) {
+        return null;
+      }
+
+      current = current.getChild(letter);
+    });
+
+    return current.value === null ? null : current;
+  }
+
+  /**
   * @param  {string}  word
   * @return {Boolean}
   */
