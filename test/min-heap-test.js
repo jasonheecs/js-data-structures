@@ -34,4 +34,17 @@ describe('Test Min Heap', function () {
 
     expect(heap.peek.bind(heap)).to.throw(Error, 'Heap is empty!');
   });
+
+  it('test poll', function () {
+    for (let i = 0; i < 100; i++) {
+      let data = generateRandomNumbers(10, getRandomIntInclusive(1, 9999), getRandomIntInclusive(1, 9999));
+      let heap = createMinHeap(data);
+      let minValue = Math.min.apply(Math, data);
+
+      expect(heap.poll()).to.be.equal(minValue);
+      expect(data.length - heap.values.length).to.equal(1);
+      data.splice(data.indexOf(minValue), 1);
+      expect(heap.poll()).to.be.equal(Math.min.apply(Math, data));
+    }
+  });
 });

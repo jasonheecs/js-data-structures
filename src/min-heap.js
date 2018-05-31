@@ -75,6 +75,22 @@ export default class MinHeap {
   }
 
   /**
+   * @param  {number}  index
+   * @return {Boolean}
+   */
+  hasLeftChild (index) {
+    return this.getLeftChildIndex(index) < this.values.length;
+  }
+
+  /**
+   * @param  {number}  index
+   * @return {Boolean}
+   */
+  hasRightChild (index) {
+    return this.getRightChildIndex(index) < this.values.length;
+  }
+
+  /**
    * @param  {number} index
    */
   add (value) {
@@ -102,6 +118,41 @@ export default class MinHeap {
 
       swap(currentIndex, parentIndex, this.values);
       currentIndex = parentIndex;
+    }
+  }
+
+  /**
+   * @return {number}
+   */
+  poll () {
+    this.checkIfEmpty();
+
+    swap(0, this.values.length - 1, this.values);
+    let minNum = this.values.pop();
+
+    if (this.values.length > 1) {
+      this.heapifyDown();
+    }
+
+    return minNum;
+  }
+
+  heapifyDown () {
+    let currentIndex = 0;
+
+    while (this.hasLeftChild(currentIndex)) {
+      let smallestChildIndex = this.getLeftChildIndex(currentIndex);
+
+      if (this.hasRightChild(currentIndex) && this.getRightChild(currentIndex) < this.getLeftChild(currentIndex)) {
+        smallestChildIndex = this.getRightChildIndex(currentIndex);
+      }
+
+      if (this.values[currentIndex] < this.values[smallestChildIndex]) {
+        break;
+      }
+
+      swap(smallestChildIndex, currentIndex, this.values);
+      currentIndex = smallestChildIndex;
     }
   }
 
