@@ -7,6 +7,7 @@ import Stack from './stack.js';
 import Queue from './queue.js';
 import BST from './binary-search-tree.js';
 import Trie from './trie.js';
+import MinHeap from './min-heap.js';
 
 export {
   List,
@@ -15,5 +16,6 @@ export {
   Stack,
   Queue,
   BST,
-  Trie
+  Trie,
+  MinHeap
 };
