@@ -22,7 +22,14 @@
   },
   "keywords": [
     "data structures",
-    "linked list"
+    "linked list",
+    "binary search tree",
+    "queue",
+    "stack",
+    "trie",
+    "min heap",
+    "doubly linked list",
+    "circular linked list"
   ],
   "author": "jasonheecs",
   "license": "MIT",
