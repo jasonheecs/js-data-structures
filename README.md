@@ -20,6 +20,7 @@ A package containing implementations of various data structures in Javascript. T
 ```js
     var {BST} = require('@jasonheecs/js-data-structures');
     var {List} = require('@jasonheecs/js-data-structures');
+    var {Trie} = require('@jasonheecs/js-data-structures');
 
     var bst = new BST();
     bst.add(10);
@@ -34,7 +35,19 @@ A package containing implementations of various data structures in Javascript. T
     linkedList.add(2);
     linkedList.add(3);
 
-    console.log(linkedList.search(2));
+    console.log(linkedList.search(2)); // Node { value: 2, next: Node { value: 3, next: null } }
+
+
+    var trie = new Trie();
+    trie.addWord('cat');
+    trie.addWord('car');
+    trie.addWord('dog');
+
+    console.log(trie.find('ca')); 
+    /** Node { value: 'a', children: Map {
+         't' => Node { value: 't', children: Map {}, isCompleteWord: true },
+         'r' => Node { value: 'r', children: Map {}, isCompleteWord: true } },
+        isCompleteWord: false } **/
 ```
 
 ## Running unit tests
