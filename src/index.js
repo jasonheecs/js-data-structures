@@ -8,6 +8,7 @@ import Queue from './queue.js';
 import BST from './binary-search-tree.js';
 import Trie from './trie.js';
 import MinHeap from './min-heap.js';
+import Graph from './graph.js';
 
 export {
   List,
@@ -17,5 +18,6 @@ export {
   Queue,
   BST,
   Trie,
-  MinHeap
+  MinHeap,
+  Graph
 };
