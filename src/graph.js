@@ -37,19 +37,18 @@ export default class Graph {
     return output;
   }
 
-  bfs (vertex) {
+  bfs (vertexA, vertexB) {
     let q = [];
     let visited = new Set();
-    let firstVertex = this.adjList.keys().next().value;
 
-    q.push([firstVertex]);
-    visited.add(firstVertex);
+    q.push([vertexA]);
+    visited.add(vertexA);
 
     while (q.length) {
       let path = q.shift();
       let v = path[path.length - 1];
 
-      if (v === vertex) {
+      if (v === vertexB) {
         return path;
       }
 
@@ -62,6 +61,39 @@ export default class Graph {
     }
 
     return [];
+  }
+
+  dfs (vertexA, vertexB) {
+    let visited = new Set();
+    let adjList = this.adjList;
+
+    return dfsHelper(vertexA, []);
+
+    /**
+     * @param  {*} v
+     * @param  {Array} path
+     * @return {Array | boolean}
+     */
+    function dfsHelper (v, path) {
+      path.push(v);
+      visited.add(v);
+
+      if (v === vertexB) {
+        return path;
+      }
+
+      for (let adjacent of adjList.get(v)) {
+        if (!visited.has(adjacent)) {
+          let result = dfsHelper(adjacent, path);
+
+          if (result) {
+            return path;
+          }
+        }
+      }
+
+      return false;
+    }
   }
 
   get vertices () {

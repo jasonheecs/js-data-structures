@@ -31,8 +31,9 @@ function createGraph () {
 }
 
 describe('Test Graph', function () {
+  let g = createGraph();
+
   it('test graph creation', function () {
-    let g = createGraph();
     expect(g.print().replace(/\s/g, '')).to.have.string(`
         A => B D E
         B => A C
@@ -44,10 +45,15 @@ describe('Test Graph', function () {
   });
 
   it('test bfs', function () {
-    let g = createGraph();
+    expect(g.bfs('A', 'F')).to.deep.equal(['A', 'E', 'F']);
+    expect(g.bfs('B', 'B')).to.deep.equal(['B']);
+    expect(g.bfs('A', 'G')).to.deep.equal([]);
+  });
 
-    expect(g.bfs('F')).to.deep.equal(['A', 'E', 'F']);
-    expect(g.bfs('A')).to.deep.equal(['A']);
-    expect(g.bfs('G')).to.deep.equal([]);
+  it('test dfs', function () {
+    expect(g.dfs('A', 'F')).to.deep.equal(['A', 'B', 'C', 'E', 'D', 'F']);
+    expect(g.dfs('A', 'C')).to.deep.equal(['A', 'B', 'C']);
+    expect(g.dfs('C', 'C')).to.deep.equal(['C']);
+    expect(g.dfs('A', 'G')).to.be.false;
   });
 });
