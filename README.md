@@ -15,6 +15,7 @@ A package containing implementations of various data structures in Javascript. T
 - [Stack](src/stack.js)
 - [Trie](src/trie.js)
 - [Min Heap](src/min-heap.js)
+- [Graph](src/graph.js)
 
 ## Usage
 ```js
