@@ -42,4 +42,12 @@ describe('Test Graph', function () {
         F => E C
       `.trim().replace(/\r?\n|\r|\s/g, ''));
   });
+
+  it('test bfs', function () {
+    let g = createGraph();
+
+    expect(g.bfs('F')).to.deep.equal(['A', 'E', 'F']);
+    expect(g.bfs('A')).to.deep.equal(['A']);
+    expect(g.bfs('G')).to.deep.equal([]);
+  });
 });
