@@ -310,9 +310,7 @@ export default class BST {
         return;
       }
 
-      let tmp = node.left;
-      node.left = node.right;
-      node.right = tmp;
+      [node.left, node.right] = [node.right, node.left];
 
       invertSubtree(node.left);
       invertSubtree(node.right);
