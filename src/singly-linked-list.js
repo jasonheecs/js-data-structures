@@ -115,44 +115,48 @@ export default class List {
    * @return {Boolean}
    */
   delete (value) {
-    let current = this.first;
+    let hasDeletedNode = false;
 
-    if (current != null && current.value === value) {
-      this.first = current.next;
-
-      return true;
+    if (!this.isEmpty() && this.first.value === value) {
+      this.first = this.first.next;
+      hasDeletedNode = true;
     }
 
+    let previous = null;
+    let current = this.first;
+
     while (current !== null) {
-      if (current.next.value === value) {
-        current.next = current.next.next;
-        return true;
+      if (current.value === value) {
+        previous.next = current.next;
+        hasDeletedNode = true;
+      } else {
+        previous = current;
       }
 
       current = current.next;
     }
 
-    return false;
+    return hasDeletedNode;
   }
 
   /**
    * Reverse the linked list
    */
   reverse () {
-    let next = this.first.next;
-    let tmp;
+    let previous = null;
+    let current = this.first;
+    let next = null;
 
-    while (tmp !== null) {
-      tmp = next.next;
+    while (current !== null) {
+      next = current.next;
 
-      next.next = this.first;
-      if (next.next.next === next) {
-        next.next.next = null;
-      }
+      current.next = previous;
 
-      this.first = next;
-      next = tmp;
+      previous = current;
+      current = next;
     }
+
+    this.first = previous;
   }
 
   /**
