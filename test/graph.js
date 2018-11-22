@@ -1,6 +1,6 @@
 'use strict';
 
-import {Graph} from '../src/index.js';
+import { Graph } from '../src/index.js';
 
 const expect = require('chai').expect;
 
@@ -54,6 +54,6 @@ describe('Test Graph', function () {
     expect(g.dfs('A', 'F')).to.deep.equal(['A', 'B', 'C', 'E', 'D', 'F']);
     expect(g.dfs('A', 'C')).to.deep.equal(['A', 'B', 'C']);
     expect(g.dfs('C', 'C')).to.deep.equal(['C']);
-    expect(g.dfs('A', 'G')).to.be.false;
+    expect(g.dfs('A', 'G')).to.deep.equal([]);
   });
 });
