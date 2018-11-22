@@ -7,7 +7,6 @@
     "lint": "eslint src/*.js test/*.js",
     "fix-lint": "eslint src/*.js test/*.js --fix",
     "prepare": "./node_modules/babel-cli/bin/babel.js src --out-dir lib",
-    "precommit": "npm run lint",
     "test": "nyc --reporter=html --reporter=text mocha --require babel-core/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -53,5 +52,10 @@
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
     "random-words": "^1.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
