@@ -1,6 +1,6 @@
 'use strict';
 
-import {Graph} from '../src/index.js';
+import { Graph } from '../src/index.js';
 
 const expect = require('chai').expect;
 
