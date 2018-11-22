@@ -1,7 +1,7 @@
 'use strict';
 
-import {BST} from '../src/index.js';
-import {generateRandomNumbers, getRandomIntInclusive} from './helper.js';
+import { BST } from '../src/index.js';
+import { generateRandomNumbers, getRandomIntInclusive } from './helper.js';
 
 const expect = require('chai').expect;
 

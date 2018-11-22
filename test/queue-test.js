@@ -1,7 +1,7 @@
 'use strict';
 
-import {Queue} from '../src/index.js';
-import {generateRandomNumbers} from './helper.js';
+import { Queue } from '../src/index.js';
+import { generateRandomNumbers } from './helper.js';
 
 const expect = require('chai').expect;
 

@@ -1,8 +1,8 @@
 'use strict';
 
-import {CircularList} from '../src/index.js';
+import { CircularList } from '../src/index.js';
 import commonTests from './linked-lists-common.js';
-import {generateRandomNumbers, generateList} from './helper.js';
+import { generateRandomNumbers, generateList } from './helper.js';
 
 const expect = require('chai').expect;
 

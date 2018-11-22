@@ -1,6 +1,6 @@
 'use strict';
 
-import {Trie} from '../src/index.js';
+import { Trie } from '../src/index.js';
 
 const randomWords = require('random-words');
 const expect = require('chai').expect;

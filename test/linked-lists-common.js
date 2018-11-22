@@ -1,6 +1,6 @@
 'use strict';
 
-import {generateRandomNumbers, generateList, getRandomIntInclusive, formatRandomData} from './helper.js';
+import { generateRandomNumbers, generateList, getRandomIntInclusive, formatRandomData } from './helper.js';
 
 const expect = require('chai').expect;
 
