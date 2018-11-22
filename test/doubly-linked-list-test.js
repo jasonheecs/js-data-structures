@@ -1,8 +1,8 @@
 'use strict';
 
-import {DoublyList} from '../src/index.js';
+import { DoublyList } from '../src/index.js';
 import commonTests from './linked-lists-common.js';
-import {generateRandomNumbers, generateList} from './helper.js';
+import { generateRandomNumbers, generateList } from './helper.js';
 
 const expect = require('chai').expect;
 

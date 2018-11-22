@@ -1,7 +1,7 @@
 'use strict';
 
-import {MinHeap} from '../src/index.js';
-import {generateRandomNumbers, getRandomIntInclusive} from './helper.js';
+import { MinHeap } from '../src/index.js';
+import { generateRandomNumbers, getRandomIntInclusive } from './helper.js';
 
 const expect = require('chai').expect;
 
