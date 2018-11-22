@@ -87,12 +87,12 @@ export default class Graph {
           let result = dfsHelper(adjacent, path);
 
           if (result) {
-            return path;
+            return result;
           }
         }
       }
 
-      return false;
+      return [];
     }
   }
 
