@@ -86,7 +86,7 @@ export default class Graph {
         if (!visited.has(adjacent)) {
           let result = dfsHelper(adjacent, path);
 
-          if (result) {
+          if (result.length) {
             return result;
           }
         }
